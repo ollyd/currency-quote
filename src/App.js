@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import theme from './themes/theme';
 import GlobalStyles from './themes/GlobalStyles';
-import GetQuote from './components/GetQuote';
+import Quote from './components/Quote';
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
           <Normalize />
           <GlobalStyles />
           <Switch>
-            <Route exact path="/" component={GetQuote} />
+            <Route exact path="/" component={Quote} />
             <Redirect to="/" />
           </Switch>
         </>

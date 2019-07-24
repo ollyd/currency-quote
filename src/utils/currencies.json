@@ -1,0 +1,18 @@
+[
+  {
+    "type": "Australian Dollar (AUD)",
+    "value": "AUD"
+  },
+  {
+    "type": "United States Dollar (USD)",
+    "value": "USD"
+  },
+  {
+    "type": "British Pound (GBP)",
+    "value": "GBP"
+  },
+  {
+    "type": "European Euro (EUR)",
+    "value": "EUR"
+  }
+]
