@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Loading from 'components/ui/Loading';
 import CountryCodes from 'components/ui/CountryCodes';
 import Currencies from 'components/ui/Currencies';
+import Card from 'components/ui/Card';
 
-export default function GetQuote({ setResponse }) {
+export default function GetQuote(props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [number, setNumber] = useState('');
-  const [fromCurrency, setFromCurrency] = useState('AUD');
-  const [toCurrency, setToCurrency] = useState('USD');
-  const [amount, setAmount] = useState(0.00);
   const [isLoading, setIsLoading] = useState(false);
   const [setError] = useState(null);
+
+  const {
+    setResponse,
+    fromCurrency,
+    setFromCurrency,
+    toCurrency,
+    setToCurrency,
+    amount,
+    setAmount,
+  } = props;
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -41,7 +48,7 @@ export default function GetQuote({ setResponse }) {
         event.preventDefault();
       }}
     >
-      <StyledPaper>
+      <Card>
         <InputGroup>
           <StyledTextField
             label="First Name"
@@ -118,7 +125,7 @@ export default function GetQuote({ setResponse }) {
           <StyledButton variant="contained" type="submit" disabled={isLoading}>Get Quote</StyledButton>
           {isLoading && <Loading size={24} />}
         </ButtonWrapper>
-      </StyledPaper>
+      </Card>
     </Form>
   );
 }
@@ -139,14 +146,6 @@ const InputGroup = styled.div`
 
 const ButtonWrapper = styled.div`
   margin: 1.6rem 0;
-`;
-
-const StyledPaper = styled(Paper)`
-  && {
-    flex: 1;
-    padding: 1.6rem;
-    max-width: 90rem;
-  }
 `;
 
 const StyledTextField = styled(TextField)`
@@ -189,4 +188,10 @@ const StyledButton = styled(Button)`
 
 GetQuote.propTypes = {
   setResponse: PropTypes.func.isRequired,
+  fromCurrency: PropTypes.string.isRequired,
+  setFromCurrency: PropTypes.func.isRequired,
+  toCurrency: PropTypes.string.isRequired,
+  setToCurrency: PropTypes.func.isRequired,
+  amount: PropTypes.string.isRequired,
+  setAmount: PropTypes.func.isRequired,
 };

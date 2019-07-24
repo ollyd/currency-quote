@@ -17,13 +17,13 @@ export default function Currencies(props) {
   } = props;
 
   return (
-    <StyledFormControl marginleft={marginLeft} marginright={marginRight}>
+    <StyledFormControl marginleft={marginLeft ? 'true' : null} marginright={marginRight ? 'true' : null}>
       <InputLabel htmlFor="currencies">{label}</InputLabel>
       <Select {...rest} value={value}>
         {currencies.map(currency => (
-          <MenuItem key={currency.value} value={currency.value}>
+          <StyledMenuItem key={currency.value} value={currency.value}>
             {currency.type}
-          </MenuItem>
+          </StyledMenuItem>
         ))}
       </Select>
     </StyledFormControl>
@@ -54,6 +54,12 @@ const StyledFormControl = styled(FormControl)`
       }
     }
   `}
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  && {
+    font-size: 1.6rem;
+  }
 `;
 
 Currencies.propTypes = {

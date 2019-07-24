@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import v4 from 'uuid/v4';
+import Select from '@material-ui/core/Select';
+import { MenuItem } from '@material-ui/core';
 import countries from '../../utils/countries.json';
 
 export default function CountryCodes(props) {
@@ -14,13 +13,13 @@ export default function CountryCodes(props) {
   return (
     <StyledFormControl>
       <InputLabel>Code</InputLabel>
-      <NativeSelect {...rest} value={value} input={<Input />}>
+      <Select {...rest} value={value}>
         {countries.map(country => (
-          <option key={v4()} value={country.code} disabled={country.code === 0 ? 'disabled' : false}>
+          <StyledMenuItem key={country.cca2} value={country.code} disabled={country.code === 0 ? 'disabled' : false}>
             {`${country.cca2} (+${country.code})`}
-          </option>
+          </StyledMenuItem>
         ))}
-      </NativeSelect>
+      </Select>
     </StyledFormControl>
   );
 }
@@ -37,6 +36,12 @@ const StyledFormControl = styled(FormControl)`
     & label {
       font-size: 1.6rem;
     }
+  }
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  && {
+    font-size: 1.6rem;
   }
 `;
 

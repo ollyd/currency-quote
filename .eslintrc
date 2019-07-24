@@ -18,7 +18,8 @@
     "react/destructuring-assignment": ["always", { "ignoreClassFields": true }],
     "arrow-body-style": "off",
     "no-confusing-arrow": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "radix": "off"
   },
   "settings": {
     "import/resolver": {
