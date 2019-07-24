@@ -10,7 +10,6 @@ export default createGlobalStyle`
     body {
       background-color: ${theme.palette.background.default};
       color: ${theme.palette.text.primary};
-      font-size: 1.4rem;
       line-height: 1.5;
       margin: 0;
       padding: 0;

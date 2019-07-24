@@ -28,6 +28,15 @@ export default function CountryCodes(props) {
 const StyledFormControl = styled(FormControl)`
   && {
     margin: 0.8rem 0;
+
+    & div {
+      font-size: 1.6rem;
+      line-height: 2rem;
+    }
+
+    & label {
+      font-size: 1.6rem;
+    }
   }
 `;
 

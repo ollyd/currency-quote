@@ -7,6 +7,7 @@ import { Normalize } from 'styled-normalize';
 import theme from './themes/theme';
 import GlobalStyles from './themes/GlobalStyles';
 import Quote from './components/Quote';
+import Navbar from './components/ui/Navbar';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <>
           <Normalize />
           <GlobalStyles />
+          <Navbar />
           <Switch>
             <Route exact path="/" component={Quote} />
             <Redirect to="/" />

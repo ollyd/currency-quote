@@ -37,7 +37,16 @@ const StyledFormControl = styled(FormControl)`
       margin-bottom: 0.8rem;
       margin-left: ${marginleft ? '0.8rem' : '0'};
       margin-right: ${marginright ? '0.8rem' : '0'};
-      width: 33.3%;
+      width: 35%;
+
+      & div {
+        font-size: 1.6rem;
+        line-height: 2rem;
+      }
+
+      & label {
+        font-size: 1.6rem;
+      }
 
       @media (max-width: 600px) {
         width: 100%;

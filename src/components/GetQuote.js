@@ -114,12 +114,11 @@ export default function GetQuote({ setResponse }) {
           />
         </InputGroup>
 
+        <ButtonWrapper>
+          <StyledButton variant="contained" type="submit" disabled={isLoading}>Get Quote</StyledButton>
+          {isLoading && <Loading size={24} />}
+        </ButtonWrapper>
       </StyledPaper>
-
-      <ButtonWrapper>
-        <StyledButton variant="contained" type="submit" disabled={isLoading}>Get Quote</StyledButton>
-        {isLoading && <Loading size={24} />}
-      </ButtonWrapper>
     </Form>
   );
 }
@@ -139,10 +138,7 @@ const InputGroup = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-  position: fixed;
-  right: 2.4rem;
-  bottom: 2.4rem;
-  z-index: 1;
+  margin: 1.6rem 0;
 `;
 
 const StyledPaper = styled(Paper)`
@@ -157,10 +153,15 @@ const StyledTextField = styled(TextField)`
   ${({ marginleft, marginright }) => `
     && {
       flex: 1;
+
       margin-top: 0.8rem;
       margin-bottom: 0.8rem;
       margin-left: ${marginleft ? '0.8rem' : '0'};
       margin-right: ${marginright ? '0.8rem' : '0'};
+
+      & label, input {
+        font-size: 1.6rem;
+      }
 
       @media (max-width: 600px) {
         margin: 0.8rem 0;
@@ -172,6 +173,10 @@ const StyledTextField = styled(TextField)`
 const StyledButton = styled(Button)`
   ${({ theme }) => `
     && {
+      height: 3.8rem;
+      font-size: 1.6rem;
+      margin-left: auto;
+      display: block;
       background-color: ${theme.palette.primary.main};
       color: ${theme.palette.primary.contrastText};
 
