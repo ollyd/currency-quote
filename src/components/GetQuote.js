@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Loading from 'components/ui/Loading';
 import CountryCodes from 'components/ui/CountryCodes';
 import Currencies from 'components/ui/Currencies';
 import Card from 'components/ui/Card';
+import StyledButton from 'components/ui/StyledButton';
 
 export default function GetQuote(props) {
   const [firstName, setFirstName] = useState('');
@@ -18,7 +18,9 @@ export default function GetQuote(props) {
   const [setError] = useState(null);
 
   const {
+    response,
     setResponse,
+    setShowQuote,
     fromCurrency,
     setFromCurrency,
     toCurrency,
@@ -29,16 +31,18 @@ export default function GetQuote(props) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
+    let json;
 
     try {
       const res = await fetch(`https://api.ofx.com/PublicSite.ApiService/OFX/spotrate/Individual/${fromCurrency}/${toCurrency}/${amount}?format=json'`);
-      const json = await res.json();
+      json = await res.json();
       setResponse(json);
     } catch (err) {
       setError(err);
     }
 
     setIsLoading(false);
+    if (json.CustomerRate) setShowQuote(true);
   };
 
   return (
@@ -116,10 +120,15 @@ export default function GetQuote(props) {
             label="Amount"
             onChange={e => setAmount(e.target.value)}
             value={amount}
+            type="number"
+            min="1"
+            required
             fullWidth
             marginleft="true"
           />
         </InputGroup>
+
+        {response ? response.SystemMessage && <ErrorMessage>{response.SystemMessage}</ErrorMessage> : null}
 
         <ButtonWrapper>
           <StyledButton variant="contained" type="submit" disabled={isLoading}>Get Quote</StyledButton>
@@ -142,6 +151,12 @@ const InputGroup = styled.div`
   @media (max-width: 600px) {
     flex-direction: column;
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 1.4rem;
+  text-align: center;
 `;
 
 const ButtonWrapper = styled.div`
@@ -169,29 +184,18 @@ const StyledTextField = styled(TextField)`
   `}
 `;
 
-const StyledButton = styled(Button)`
-  ${({ theme }) => `
-    && {
-      height: 3.8rem;
-      font-size: 1.6rem;
-      margin-left: auto;
-      display: block;
-      background-color: ${theme.palette.primary.main};
-      color: ${theme.palette.primary.contrastText};
-
-      &:hover {
-        background-color: ${theme.palette.primary.dark};
-      }
-    }
-  `}
-`;
-
 GetQuote.propTypes = {
   setResponse: PropTypes.func.isRequired,
+  setShowQuote: PropTypes.func.isRequired,
   fromCurrency: PropTypes.string.isRequired,
   setFromCurrency: PropTypes.func.isRequired,
   toCurrency: PropTypes.string.isRequired,
   setToCurrency: PropTypes.func.isRequired,
   amount: PropTypes.string.isRequired,
   setAmount: PropTypes.func.isRequired,
+  response: PropTypes.shape({}),
+};
+
+GetQuote.defaultProps = {
+  response: null,
 };

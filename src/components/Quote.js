@@ -6,6 +6,7 @@ import Title from './ui/Title';
 
 export default function Quote() {
   const [response, setResponse] = useState(null);
+  const [showQuote, setShowQuote] = useState(false);
   const [fromCurrency, setFromCurrency] = useState('AUD');
   const [toCurrency, setToCurrency] = useState('USD');
   const [amount, setAmount] = useState('');
@@ -14,9 +15,11 @@ export default function Quote() {
   return (
     <Container>
       <Title title="Quick Quote" />
-      {response === null ? (
+      {!showQuote ? (
         <GetQuote
+          response={response}
           setResponse={setResponse}
+          setShowQuote={setShowQuote}
           setFromCurrency={setFromCurrency}
           setToCurrency={setToCurrency}
           fromCurrency={fromCurrency}
@@ -27,7 +30,7 @@ export default function Quote() {
       ) : (
         <ShowQuote
           response={response}
-          setResponse={setResponse}
+          setShowQuote={setShowQuote}
           fromCurrency={fromCurrency}
           toCurrency={toCurrency}
           amount={amount}

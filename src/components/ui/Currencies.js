@@ -17,7 +17,7 @@ export default function Currencies(props) {
   } = props;
 
   return (
-    <StyledFormControl marginleft={marginLeft ? 'true' : null} marginright={marginRight ? 'true' : null}>
+    <StyledFormControl marginleft={marginLeft ? 'true' : null} marginright={marginRight ? 'true' : null} required>
       <InputLabel htmlFor="currencies">{label}</InputLabel>
       <Select {...rest} value={value}>
         {currencies.map(currency => (

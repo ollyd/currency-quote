@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
 import Card from 'components/ui/Card';
+import StyledButton from 'components/ui/StyledButton';
 
 export default function ShowQuote(props) {
   const {
     response,
-    setResponse,
+    setShowQuote,
     fromCurrency,
     toCurrency,
     amount,
@@ -40,7 +40,7 @@ export default function ShowQuote(props) {
             </Value>
           </Group>
         </Groups>
-        <ButtonWrapper onClick={() => setResponse(null)}>
+        <ButtonWrapper onClick={() => setShowQuote(false)}>
           <StyledButton variant="contained" type="submit">New Quote</StyledButton>
         </ButtonWrapper>
       </Card>
@@ -110,26 +110,9 @@ const ButtonWrapper = styled.div`
   margin: 1.6rem 0;
 `;
 
-const StyledButton = styled(Button)`
-  ${({ theme }) => `
-    && {
-      height: 3.8rem;
-      font-size: 1.6rem;
-      margin-left: auto;
-      display: block;
-      background-color: ${theme.palette.primary.main};
-      color: ${theme.palette.primary.contrastText};
-
-      &:hover {
-        background-color: ${theme.palette.primary.dark};
-      }
-    }
-  `}
-`;
-
 ShowQuote.propTypes = {
   response: PropTypes.shape({}),
-  setResponse: PropTypes.func.isRequired,
+  setShowQuote: PropTypes.func.isRequired,
   fromCurrency: PropTypes.string.isRequired,
   toCurrency: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired,
